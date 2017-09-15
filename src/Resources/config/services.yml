@@ -1,0 +1,7 @@
+parameters:
+    hgabka_kunstmaan_banner.banner_handler.class: 'Hgabka\KunstmaanBannerBundle\Helper\BannerHandler'
+
+services:
+    hgabka_kunstmaan_banner.banner_handler:
+        class: '%hgabka_kunstmaan_banner.banner_handler.class%'
+        arguments: ["@doctrine", "@request_stack"]
