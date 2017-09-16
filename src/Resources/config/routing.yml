@@ -1,0 +1,4 @@
+KunstmaanBannerBundle_routes:
+    resource: '@HgabkaKunstmaanBannerBundle/Controller/BannerAdminListController.php'
+    type:     annotation
+    prefix:   /admin/banners

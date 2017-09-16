@@ -1,0 +1,15 @@
+hgabka_kuma_banner:
+    labels:
+        name: Name
+        place: Place
+        start: Starts at
+        end: Ends at
+        type: Type
+        media: Image
+        hover_media: "'Hover' image"
+        image_alt: "Image 'alt' text"
+        image_title: "Image 'title' text"
+        html: Html content
+    types:
+        image: Kép
+        html: Html content

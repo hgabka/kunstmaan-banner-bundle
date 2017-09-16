@@ -4,4 +4,16 @@ parameters:
 services:
     hgabka_kunstmaan_banner.banner_handler:
         class: '%hgabka_kunstmaan_banner.banner_handler.class%'
-        arguments: ["@doctrine", "@request_stack"]
+        arguments: ["@hgabka_kunstmaan_extension.kuma_utils", ""]
+
+    hgabka_kunstmaan_banner.banner_type:
+        class: Hgabka\KunstmaanBannerBundle\Form\BannerAdminType
+        arguments: ['@hgabka_kunstmaan_banner.banner_handler', "@router"]
+        tags:
+            - { name: form.type }
+
+    hgabka_kunstmaan_banner.menu.adaptor.banner:
+        class: Hgabka\KunstmaanBannerBundle\Helper\Menu\BannerMenuAdaptor
+        arguments: ['@hgabka_kunstmaan_banner.banner_handler']
+        tags:
+            -  { name: kunstmaan_admin.menu.adaptor }

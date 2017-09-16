@@ -1,13 +1,5 @@
 <?php
 
-/*
- * This file is part of PHP CS Fixer.
- * (c) Fabien Potencier <fabien@symfony.com>
- *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-
 namespace Hgabka\KunstmaanBannerBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -15,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class HgabkaKunstmaanEmailExtension extends Extension
+class HgabkaKunstmaanBannerExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -27,5 +19,8 @@ class HgabkaKunstmaanEmailExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $handlerDefinition = $container->getDefinition('hgabka_kunstmaan_banner.banner_handler');
+        $handlerDefinition->replaceArgument(1, $config['places']);
     }
 }
