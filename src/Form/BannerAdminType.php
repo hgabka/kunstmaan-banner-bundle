@@ -95,7 +95,7 @@ class BannerAdminType extends AbstractType
                 'required' => false,
             ])
             ->add('url', URLChooserType::class, [
-                'link_types' => ['pagepart.link.internal', 'pagepart.link.external'],
+                'link_types' => [URLChooserType::INTERNAL, URLChooserType::EXTERNAL],
                 'label' => 'hgabka_kuma_banner.labels.url',
                 'required' => false,
             ])
@@ -122,6 +122,10 @@ class BannerAdminType extends AbstractType
                 $cultures = $this->handler->getKumaUtils()->getLocaleChoices();
                 if (count($cultures) < 2) {
                     $banner->setLocale($this->handler->getKumaUtils()->getDefaultLocale());
+                }
+
+                if (empty($banner->getLocale())) {
+                    $banner->setLocale(null);
                 }
             })
         ;
