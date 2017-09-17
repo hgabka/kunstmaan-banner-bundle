@@ -1,7 +1,7 @@
 {% if banner.isImage() %}
-<a{% if banner.url is not empty %} href="{{ banner.url }}"{% endif %}{% if banner.newWindow %} target="_blank"{% endif %}>
-<img id="banner-image-{{ banner.id }}" data-normal="{{ banner.media.url }}" data-hover="{{ banner.hoverMedia ? banner.hoverMedia.url : '' }}" alt="{{ banner.imageAlt }}" title="{{ banner.imageTitle }}" src="{{ asset(banner.media.url) }}" />
-</a>
+	<a{% if banner.url is not empty %} href="{{ banner.url }}"{% endif %}{% if banner.newWindow %} target="_blank"{% endif %}>
+		<img id="banner-image-{{ banner.id }}" data-normal="{{ banner.media.url }}" data-hover="{{ banner.hoverMedia ? banner.hoverMedia.url : '' }}" alt="{{ banner.imageAlt }}" title="{{ banner.imageTitle }}" src="{{ asset(banner.media.url) }}" />
+	</a>
 {% else %}
     {{ banner.html | raw }}
 {% endif %}
