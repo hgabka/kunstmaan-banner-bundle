@@ -4,7 +4,7 @@ parameters:
 services:
     hgabka_kunstmaan_banner.banner_handler:
         class: '%hgabka_kunstmaan_banner.banner_handler.class%'
-        arguments: ["@hgabka_kunstmaan_extension.kuma_utils", ""]
+        arguments: ["@doctrine", "@hgabka_kunstmaan_extension.kuma_utils", ""]
 
     hgabka_kunstmaan_banner.banner_type:
         class: Hgabka\KunstmaanBannerBundle\Form\BannerAdminType
@@ -17,3 +17,10 @@ services:
         arguments: ['@hgabka_kunstmaan_banner.banner_handler']
         tags:
             -  { name: kunstmaan_admin.menu.adaptor }
+
+    hgabka_kunstmaan_banner.banner_twig_extension:
+        class: Hgabka\KunstmaanBannerBundle\Twig\HgabkaKunstmaanBannerTwigExtension
+        arguments: ['@hgabka_kunstmaan_banner.banner_handler']
+        public: false
+        tags:
+            - { name: twig.extension }

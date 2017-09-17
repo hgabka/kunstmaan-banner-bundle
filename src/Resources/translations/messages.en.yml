@@ -10,6 +10,12 @@ hgabka_kuma_banner:
         image_alt: "Image 'alt' text"
         image_title: "Image 'title' text"
         html: Html content
+        locale: Language
+        url: Link
+        new_window: Link opens in new window
+        priority: Priority
     types:
         image: Kép
         html: Html content
+    locales:
+        all: any

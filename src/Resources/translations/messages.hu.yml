@@ -10,6 +10,12 @@ hgabka_kuma_banner:
         image_alt: "Kép 'alt' szöveg"
         image_title: "Kép 'title' szöveg"
         html: Html tartalom
+        locale: Nyelv
+        url: Link
+        new_window: A link új ablakban nyíljon meg
+        priority: Prioritás
     types:
         image: Kép
         html: Html tartalom
+    locales:
+        all: minden nyelven

@@ -1,9 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sfhun
- * Date: 2017.09.16.
- * Time: 12:29
+
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Hgabka\KunstmaanBannerBundle\AdminList;
@@ -14,19 +16,17 @@ use Hgabka\KunstmaanBannerBundle\Helper\BannerHandler;
 use Kunstmaan\AdminBundle\Helper\Security\Acl\AclHelper;
 use Kunstmaan\AdminListBundle\AdminList\Configurator\AbstractDoctrineORMAdminListConfigurator;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurator
 {
+    /** @var RouterInterface */
+    protected $router;
     /** @var BannerHandler */
     private $handler;
 
-    /** @var  RouterInterface */
-    protected $router;
-
     /**
-     * @param EntityManager $em The entity manager
-     * @param AclHelper $aclHelper The acl helper
+     * @param EntityManager $em        The entity manager
+     * @param AclHelper     $aclHelper The acl helper
      */
     public function __construct(EntityManager $em, BannerHandler $handler, RouterInterface $router, AclHelper $aclHelper = null)
     {
@@ -42,7 +42,7 @@ class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurat
     public function buildFields()
     {
         $this->addField('name', 'hgabka_kuma_banner.labels.name', true);
-        $this->addField('place', 'hgabka_kuma_banner.labels.place', false);
+        $this->addField('place', 'hgabka_kuma_banner.labels.place', false, 'HgabkaKunstmaanBannerBundle:AdminList:Banner\place.html.twig');
         $this->addField('start', 'hgabka_kuma_banner.labels.start', false);
         $this->addField('end', 'hgabka_kuma_banner.labels.end', false);
     }
@@ -107,5 +107,13 @@ class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurat
     public function getEditTemplate()
     {
         return 'HgabkaKunstmaanBannerBundle:AdminList:Banner\add_or_edit.html.twig';
+    }
+
+    /**
+     * @return BannerHandler
+     */
+    public function getHandler(): BannerHandler
+    {
+        return $this->handler;
     }
 }

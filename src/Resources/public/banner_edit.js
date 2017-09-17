@@ -6,12 +6,16 @@ $(function() {
           hideElem('#hgabka_kunstmaanbanner_banner_type_hoverMedia');
           hideElem('#hgabka_kunstmaanbanner_banner_type_imageAlt');
           hideElem('#hgabka_kunstmaanbanner_banner_type_imageTitle');
+          hideElem('#hgabka_kunstmaanbanner_banner_type_url_link_url');
+          hideElem('#hgabka_kunstmaanbanner_banner_type_newWindow');
           showElem('#hgabka_kunstmaanbanner_banner_type_html');
       } else {
           showElem('#hgabka_kunstmaanbanner_banner_type_media');
           showElem('#hgabka_kunstmaanbanner_banner_type_hoverMedia');
           showElem('#hgabka_kunstmaanbanner_banner_type_imageAlt');
           showElem('#hgabka_kunstmaanbanner_banner_type_imageTitle');
+          showElem('#hgabka_kunstmaanbanner_banner_type_url_link_url');
+          showElem('#hgabka_kunstmaanbanner_banner_type_newWindow');
           hideElem('#hgabka_kunstmaanbanner_banner_type_html');
       }
    }).change();

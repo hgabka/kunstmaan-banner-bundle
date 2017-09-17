@@ -1,14 +1,21 @@
 <?php
 
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Hgabka\KunstmaanBannerBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Hgabka\KunstmaanBannerBundle\Helper\BannerHandler;
 use Hgabka\KunstmaanExtensionBundle\Traits\TimestampableEntity;
 use Kunstmaan\AdminBundle\Entity\AbstractEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Kunstmaan\MediaBundle\Entity\Media;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Banner.
@@ -90,7 +97,8 @@ class Banner extends AbstractEntity
     /**
      * @var int
      *
-     * @ORM\Column(name="smallint", type="bigint", nullable=true)
+     * @ORM\Column(name="priority", type="smallint", nullable=true)
+     * @Assert\Range(min=0, minMessage="A prioritás minimum értéke 0", max=10, maxMessage="A prioritás maximum értéke 10")
      */
     protected $priority = 0;
 
@@ -185,6 +193,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $name
+     *
      * @return Banner
      */
     public function setName($name)
@@ -204,6 +213,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $place
+     *
      * @return Banner
      */
     public function setPlace($place)
@@ -223,6 +233,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $url
+     *
      * @return Banner
      */
     public function setUrl($url)
@@ -242,6 +253,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $html
+     *
      * @return Banner
      */
     public function setHtml($html)
@@ -261,6 +273,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param \DateTime $start
+     *
      * @return Banner
      */
     public function setStart($start)
@@ -280,6 +293,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param \DateTime $end
+     *
      * @return Banner
      */
     public function setEnd($end)
@@ -299,6 +313,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param int $priority
+     *
      * @return Banner
      */
     public function setPriority($priority)
@@ -318,6 +333,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param bool $newWindow
+     *
      * @return Banner
      */
     public function setNewWindow($newWindow)
@@ -337,6 +353,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $imageAlt
+     *
      * @return Banner
      */
     public function setImageAlt($imageAlt)
@@ -356,6 +373,7 @@ class Banner extends AbstractEntity
 
     /**
      * @param string $imageTitle
+     *
      * @return Banner
      */
     public function setImageTitle($imageTitle)
@@ -372,7 +390,7 @@ class Banner extends AbstractEntity
 
     public function setType($type)
     {
-        if ($type == BannerHandler::TYPE_HTML) {
+        if (BannerHandler::TYPE_HTML === $type) {
             $this->media = null;
             $this->hoverMedia = null;
             $this->imageAlt = null;
@@ -380,5 +398,10 @@ class Banner extends AbstractEntity
         } else {
             $this->html = null;
         }
+    }
+
+    public function isImage()
+    {
+        return BannerHandler::TYPE_IMAGE === $this->getType();
     }
 }

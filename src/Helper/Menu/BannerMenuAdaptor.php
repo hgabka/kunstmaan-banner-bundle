@@ -1,9 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sfhun
- * Date: 2017.09.16.
- * Time: 12:50
+
+/*
+ * This file is part of PHP CS Fixer.
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *     Dariusz Rumiński <dariusz.ruminski@gmail.com>
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
  */
 
 namespace Hgabka\KunstmaanBannerBundle\Helper\Menu;
@@ -13,7 +15,6 @@ use Kunstmaan\AdminBundle\Helper\Menu\MenuBuilder;
 use Kunstmaan\AdminBundle\Helper\Menu\MenuItem;
 use Kunstmaan\AdminBundle\Helper\Menu\TopMenuItem;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class BannerMenuAdaptor implements MenuAdaptorInterface
 {
@@ -37,7 +38,7 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
             $newChildren = [];
             $inserted = false;
             foreach ($children as $child) {
-                if ($child->getUniqueId() === 'settings') {
+                if ('settings' === $child->getUniqueId()) {
                     $newChildren[] = $menuItem;
                     $inserted = true;
                 }
@@ -49,7 +50,7 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
 
             $children = $newChildren;
 
-            if (stripos($request->attributes->get('_route'), $menuItem->getRoute()) === 0) {
+            if (0 === stripos($request->attributes->get('_route'), $menuItem->getRoute())) {
                 $menuItem->setActive(true);
             }
         }
