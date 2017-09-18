@@ -10,11 +10,9 @@
         document.addEventListener("DOMContentLoaded", function () {
             var $img = $('#banner-image-{{ banner.id }}');
             $img.hover(function () {
-                console.log($img.data('hover'));
                 if ($img.data('hover')) {
                     $img.prop('src', $img.data('hover'));
                 }
-
             }, function () {
                 if ($img.data('normal')) {
                     $img.prop('src', $img.data('normal'));
