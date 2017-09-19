@@ -45,6 +45,8 @@ class BannerAdminListController extends AdminListController
      */
     public function indexAction(Request $request)
     {
+        $this->denyAccessUnlessGranted($this->container->getParameter('hgabka_kunstmaan_banner.editor_role'));
+
         return parent::doIndexAction($this->getAdminListConfigurator(), $request);
     }
 
