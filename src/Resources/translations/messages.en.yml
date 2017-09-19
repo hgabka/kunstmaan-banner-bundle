@@ -15,10 +15,14 @@ hgabka_kuma_banner:
         new_window: Link opens in new window
         priority: Priority
     types:
-        image: Kép
+        image: Image
         html: Html content
     locales:
         all: any
     tabs:
         general: General data
         content: Appearance
+    errors:
+        missing_media: For 'Image' type banners an image must be provided
+        missing_html: For 'Html content' banners the content must be provided
+        invalid_times: The banner cannot start later then when it ends

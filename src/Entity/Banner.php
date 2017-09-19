@@ -8,6 +8,7 @@ use Hgabka\KunstmaanExtensionBundle\Traits\TimestampableEntity;
 use Kunstmaan\AdminBundle\Entity\AbstractEntity;
 use Kunstmaan\MediaBundle\Entity\Media;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * Banner.
@@ -250,8 +251,11 @@ class Banner extends AbstractEntity
      */
     public function setHtml($html)
     {
-        $this->html = $html;
-
+        if (!$this->isImage() && is_null($html)) {
+            $this->html = '';
+        } else {
+            $this->html = $html;
+        }
         return $this;
     }
 
@@ -377,7 +381,11 @@ class Banner extends AbstractEntity
 
     public function getType()
     {
-        return empty($this->html) ? BannerHandler::TYPE_IMAGE : BannerHandler::TYPE_HTML;
+        if (is_null($this->media) && is_null($this->html)) {
+            return null;
+        }
+
+        return is_null($this->html) ? BannerHandler::TYPE_IMAGE : BannerHandler::TYPE_HTML;
     }
 
     public function setType($type)
@@ -387,6 +395,9 @@ class Banner extends AbstractEntity
             $this->hoverMedia = null;
             $this->imageAlt = null;
             $this->imageTitle = null;
+            if (is_null($this->html)) {
+                $this->html = '';
+            }
         } else {
             $this->html = null;
         }
@@ -395,5 +406,29 @@ class Banner extends AbstractEntity
     public function isImage()
     {
         return BannerHandler::TYPE_IMAGE === $this->getType();
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->isImage() && empty($this->media)) {
+            $context->buildViolation('hgabka_kuma_banner.errors.missing_media')
+                    ->atPath('media')
+                    ->addViolation();
+        }
+
+        if (!$this->isImage() && empty($this->html)) {
+            $context->buildViolation('hgabka_kuma_banner.errors.missing_html')
+                    ->atPath('html')
+                    ->addViolation();
+        }
+
+        if (!empty($this->start) && !empty($this->end) && $this->start->format('U') >= $this->end->format('U')) {
+            $context->buildViolation('hgabka_kuma_banner.errors.invalid_times')
+                    ->atPath('start')
+                    ->addViolation();
+        }
     }
 }

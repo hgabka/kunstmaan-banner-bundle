@@ -4,6 +4,7 @@ namespace Hgabka\KunstmaanBannerBundle\Form;
 
 use Hgabka\KunstmaanBannerBundle\Helper\BannerHandler;
 use Hgabka\KunstmaanExtensionBundle\Form\Type\DatepickerType;
+use Hgabka\KunstmaanExtensionBundle\Form\Type\DateTimepickerType;
 use Kunstmaan\AdminBundle\Form\WysiwygType;
 use Kunstmaan\MediaBundle\Form\Type\MediaType;
 use Kunstmaan\NodeBundle\Form\Type\URLChooserType;
@@ -95,12 +96,12 @@ class BannerAdminType extends AbstractType
                 'label' => 'hgabka_kuma_banner.labels.new_window',
                 'required' => false,
             ])
-            ->add('start', DatepickerType::class, [
+            ->add('start', DateTimepickerType::class, [
                 'required' => false,
                 'label' => 'hgabka_kuma_banner.labels.start',
                 'locale' => 'hu',
             ])
-            ->add('end', DatepickerType::class, [
+            ->add('end', DateTimepickerType::class, [
                 'required' => false,
                 'label' => 'hgabka_kuma_banner.labels.end',
                 'locale' => 'hu',
