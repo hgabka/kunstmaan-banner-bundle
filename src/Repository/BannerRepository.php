@@ -18,6 +18,7 @@ class BannerRepository extends EntityRepository
             ->andWhere('b.end IS NULL OR b.end >= :now')
             ->setParameter('now', new \DateTime())
             ->andWhere('b.locale = :locale OR b.locale IS NULL')
+            ->andWhere('b.media IS NOT NULL OR b.html IS NOT NULL')
             ->setParameter(':locale', $locale)
             ->getQuery()
             ->getResult()
