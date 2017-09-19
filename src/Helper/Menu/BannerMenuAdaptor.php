@@ -7,9 +7,27 @@ use Kunstmaan\AdminBundle\Helper\Menu\MenuBuilder;
 use Kunstmaan\AdminBundle\Helper\Menu\MenuItem;
 use Kunstmaan\AdminBundle\Helper\Menu\TopMenuItem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class BannerMenuAdaptor implements MenuAdaptorInterface
 {
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    protected $authorizationChecker;
+
+    /** @var  string */
+    protected $editorRole;
+
+    /**
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker, string $editorRole)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+        $this->editorRole = $editorRole;
+    }
+
     /**
      * In this method you can add children for a specific parent, but also remove and change the already created children.
      *
@@ -20,7 +38,7 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
      */
     public function adaptChildren(MenuBuilder $menu, array &$children, MenuItem $parent = null, Request $request = null)
     {
-        if (null === $parent) {
+        if (null === $parent && $this->authorizationChecker->isGranted($this->editorRole)) {
             $menuItem = new TopMenuItem($menu);
             $menuItem->setRoute('hgabkakunstmaanbannerbundle_admin_banner');
             $menuItem->setUniqueId('banner');

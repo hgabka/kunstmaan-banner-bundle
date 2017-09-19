@@ -22,5 +22,13 @@ class HgabkaKunstmaanBannerExtension extends Extension
 
         $handlerDefinition = $container->getDefinition('hgabka_kunstmaan_banner.banner_handler');
         $handlerDefinition->replaceArgument(2, $config['places']);
+
+        $voterDefinition = $container->getDefinition('hgabka_kunstmaan_banner.banner_voter');
+        $voterDefinition->replaceArgument(1, $config['editor_role']);
+
+        $menuAdaptorDefinition = $container->getDefinition('hgabka_kunstmaan_banner.menu.adaptor.banner');
+        $menuAdaptorDefinition->replaceArgument(1, $config['editor_role']);
+
+        $container->setParameter('hgabka_kunstmaan_banner.editor_role', $config['editor_role']);
     }
 }

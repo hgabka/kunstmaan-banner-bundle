@@ -3,27 +3,39 @@
 namespace Hgabka\KunstmaanBannerBundle\AdminList;
 
 use Doctrine\ORM\EntityManager;
+use Hgabka\KunstmaanBannerBundle\Entity\Banner;
 use Hgabka\KunstmaanBannerBundle\Form\BannerAdminType;
 use Hgabka\KunstmaanBannerBundle\Helper\BannerHandler;
+use Hgabka\KunstmaanBannerBundle\Security\BannerVoter;
 use Kunstmaan\AdminBundle\Helper\Security\Acl\AclHelper;
 use Kunstmaan\AdminListBundle\AdminList\Configurator\AbstractDoctrineORMAdminListConfigurator;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurator
 {
+    /** @var AuthorizationChecker */
+    private $authChecker;
+
     /** @var RouterInterface */
     protected $router;
+
     /** @var BannerHandler */
     private $handler;
+
+    /** @var  string */
+    private $editorRole;
 
     /**
      * @param EntityManager $em        The entity manager
      * @param AclHelper     $aclHelper The acl helper
      */
-    public function __construct(EntityManager $em, BannerHandler $handler, RouterInterface $router, AclHelper $aclHelper = null)
+    public function __construct(EntityManager $em, AuthorizationChecker $authChecker, BannerHandler $handler, RouterInterface $router, string $editorRole, AclHelper $aclHelper = null)
     {
         parent::__construct($em, $aclHelper);
         $this->handler = $handler;
+        $this->authChecker = $authChecker;
+        $this->editorRole = $editorRole;
 
         $this->setAdminType(new BannerAdminType($handler, $router));
     }
@@ -107,5 +119,28 @@ class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurat
     public function getHandler(): BannerHandler
     {
         return $this->handler;
+    }
+
+    public function canAdd()
+    {
+        return $this->authChecker->isGranted($this->editorRole);
+    }
+
+    public function canEdit($item)
+    {
+        return $this->authChecker->isGranted(BannerVoter::EDIT, $item);
+    }
+
+    public function canDelete($item)
+    {
+        return $this->authChecker->isGranted(BannerVoter::EDIT, $item);
+    }
+
+    public function getTabFields()
+    {
+        return [
+            'hgabka_kuma_banner.tabs.general' => ['name', 'place', 'start', 'end', 'priority', 'locale'],
+            'hgabka_kuma_banner.tabs.content' => ['type', 'media', 'hoverMedia', 'imageAlt', 'imageTitle', 'url', 'newWindow'],
+        ];
     }
 }

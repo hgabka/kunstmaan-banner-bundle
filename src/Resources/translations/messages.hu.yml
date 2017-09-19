@@ -19,3 +19,6 @@ hgabka_kuma_banner:
         html: Html tartalom
     locales:
         all: minden nyelven
+    tabs:
+        general: Adatok
+        content: Megjelenés

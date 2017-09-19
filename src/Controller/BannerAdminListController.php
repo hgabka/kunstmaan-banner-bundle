@@ -26,7 +26,13 @@ class BannerAdminListController extends AdminListController
     public function getAdminListConfigurator()
     {
         if (!isset($this->configurator)) {
-            $this->configurator = new BannerAdminListConfigurator($this->getEntityManager(), $this->get('hgabka_kunstmaan_banner.banner_handler'), $this->get('router'));
+            $this->configurator = new BannerAdminListConfigurator(
+                $this->getEntityManager(),
+                $this->get('security.authorization_checker'),
+                $this->get('hgabka_kunstmaan_banner.banner_handler'),
+                $this->get('router'),
+                $this->container->getParameter('hgabka_kunstmaan_banner.editor_role')
+            );
         }
 
         return $this->configurator;

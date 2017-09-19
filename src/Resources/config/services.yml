@@ -14,7 +14,7 @@ services:
 
     hgabka_kunstmaan_banner.menu.adaptor.banner:
         class: Hgabka\KunstmaanBannerBundle\Helper\Menu\BannerMenuAdaptor
-        arguments: ['@hgabka_kunstmaan_banner.banner_handler']
+        arguments: ['@security.authorization_checker', '']
         tags:
             -  { name: kunstmaan_admin.menu.adaptor }
 
@@ -24,3 +24,10 @@ services:
         public: false
         tags:
             - { name: twig.extension }
+
+    hgabka_kunstmaan_banner.banner_voter:
+        class:  Hgabka\KunstmaanBannerBundle\Security\BannerVoter
+        arguments: ['@security.access.decision_manager', '']
+        tags:
+            - { name: security.voter }
+        public: false

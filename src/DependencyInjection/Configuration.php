@@ -36,6 +36,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->scalarNode('editor_role')->cannotBeEmpty()->defaultValue('ROLE_BANNER_ADMIN')->end()
             ->end()
         ->end()
         ;

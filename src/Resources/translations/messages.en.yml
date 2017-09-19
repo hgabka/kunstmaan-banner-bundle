@@ -19,3 +19,6 @@ hgabka_kuma_banner:
         html: Html content
     locales:
         all: any
+    tabs:
+        general: General data
+        content: Appearance
