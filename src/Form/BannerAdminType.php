@@ -3,7 +3,6 @@
 namespace Hgabka\KunstmaanBannerBundle\Form;
 
 use Hgabka\KunstmaanBannerBundle\Helper\BannerHandler;
-use Hgabka\KunstmaanExtensionBundle\Form\Type\DatepickerType;
 use Hgabka\KunstmaanExtensionBundle\Form\Type\DateTimepickerType;
 use Kunstmaan\AdminBundle\Form\WysiwygType;
 use Kunstmaan\MediaBundle\Form\Type\MediaType;
@@ -129,7 +128,7 @@ class BannerAdminType extends AbstractType
                 'label' => 'hgabka_kuma_banner.labels.locale',
                 'choices' => array_flip($cultures),
                 'required' => false,
-                'placeholder' => 'hgabka_kuma_banner.locales.all'
+                'placeholder' => 'hgabka_kuma_banner.locales.all',
             ]);
         }
     }

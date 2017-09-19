@@ -251,11 +251,12 @@ class Banner extends AbstractEntity
      */
     public function setHtml($html)
     {
-        if (!$this->isImage() && is_null($html)) {
+        if (!$this->isImage() && null === $html) {
             $this->html = '';
         } else {
             $this->html = $html;
         }
+
         return $this;
     }
 
@@ -381,11 +382,11 @@ class Banner extends AbstractEntity
 
     public function getType()
     {
-        if (is_null($this->media) && is_null($this->html)) {
+        if (null === $this->media && null === $this->html) {
             return null;
         }
 
-        return is_null($this->html) ? BannerHandler::TYPE_IMAGE : BannerHandler::TYPE_HTML;
+        return null === $this->html ? BannerHandler::TYPE_IMAGE : BannerHandler::TYPE_HTML;
     }
 
     public function setType($type)
@@ -395,7 +396,7 @@ class Banner extends AbstractEntity
             $this->hoverMedia = null;
             $this->imageAlt = null;
             $this->imageTitle = null;
-            if (is_null($this->html)) {
+            if (null === $this->html) {
                 $this->html = '';
             }
         } else {
@@ -410,6 +411,8 @@ class Banner extends AbstractEntity
 
     /**
      * @Assert\Callback
+     *
+     * @param mixed $payload
      */
     public function validate(ExecutionContextInterface $context, $payload)
     {
