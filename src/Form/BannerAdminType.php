@@ -53,8 +53,9 @@ class BannerAdminType extends AbstractType
             ->add('name', TextType::class, ['label' => 'hgabka_kuma_banner.labels.name', 'required' => true])
             ->add('place', ChoiceType::class, [
                 'label' => 'hgabka_kuma_banner.labels.place',
-                'choices' => array_flip(['' => ''] + $this->handler->getPlaceChoices()),
+                'choices' => array_flip($this->handler->getPlaceChoices()),
                 'attr' => ['data-url' => $this->router->generate('hgabkakunstmaanbannerbundle_admin_banner_get_place_data')],
+                'placeholder' => '',
             ])
             ->add(
                 'type',
@@ -123,12 +124,12 @@ class BannerAdminType extends AbstractType
             })
         ;
         $cultures = $this->handler->getKumaUtils()->getLocaleChoices();
-        $cultures = ['' => 'hgabka_kuma_banner.locales.all'] + $cultures;
         if (count($cultures) > 1) {
             $builder->add('locale', ChoiceType::class, [
                 'label' => 'hgabka_kuma_banner.labels.locale',
                 'choices' => array_flip($cultures),
                 'required' => false,
+                'placeholder' => 'hgabka_kuma_banner.locales.all'
             ]);
         }
     }
