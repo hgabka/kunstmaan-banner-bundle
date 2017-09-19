@@ -1,31 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 2017.09.19.
- * Time: 10:37
- */
+
 
 namespace Hgabka\KunstmaanBannerBundle\Security;
 
 use Hgabka\KunstmaanBannerBundle\Entity\Banner;
 use Kunstmaan\AdminBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class BannerVoter extends Voter
 {
     const EDIT = 'edit';
 
-    /** @var  string */
+    /** @var string */
     protected $editorRole;
 
-    /** @var  AccessDecisionManagerInterface */
+    /** @var AccessDecisionManagerInterface */
     protected $decisionManager;
 
     /**
      * BannerVoter constructor.
+     *
      * @param string $editorRole
      */
     public function __construct(AccessDecisionManagerInterface $decisionManager, $editorRole)
@@ -36,7 +32,7 @@ class BannerVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::EDIT])) {
+        if (!in_array($attribute, [self::EDIT], true)) {
             return false;
         }
 
@@ -54,7 +50,6 @@ class BannerVoter extends Voter
         if (!$user instanceof User) {
             return false;
         }
-
 
         switch ($attribute) {
             case self::EDIT:

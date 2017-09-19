@@ -14,16 +14,15 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurator
 {
-    /** @var AuthorizationChecker */
-    private $authChecker;
-
     /** @var RouterInterface */
     protected $router;
+    /** @var AuthorizationChecker */
+    private $authChecker;
 
     /** @var BannerHandler */
     private $handler;
 
-    /** @var  string */
+    /** @var string */
     private $editorRole;
 
     /**

@@ -16,7 +16,7 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
      */
     protected $authorizationChecker;
 
-    /** @var  string */
+    /** @var string */
     protected $editorRole;
 
     /**
