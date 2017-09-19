@@ -137,7 +137,7 @@ class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurat
 
     public function canExport()
     {
-        return $this->authChecker->isGranted($this->editorRole);
+        return false;
     }
 
     public function getTabFields()
