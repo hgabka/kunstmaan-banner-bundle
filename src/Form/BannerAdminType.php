@@ -70,10 +70,12 @@ class BannerAdminType extends AbstractType
                 'label' => 'hgabka_kuma_banner.labels.media',
                 'required' => false,
                 'attr' => ['info_text' => ''],
+				'mediatype' => 'image'
             ])
             ->add('hoverMedia', MediaType::class, [
                 'label' => 'hgabka_kuma_banner.labels.hover_media',
                 'required' => false,
+				'mediatype' => 'image'
             ])
             ->add('imageAlt', TextType::class, [
                 'label' => 'hgabka_kuma_banner.labels.image_alt',
