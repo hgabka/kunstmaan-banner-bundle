@@ -58,6 +58,6 @@ class HgabkaKunstmaanBannerTwigExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'hgabka_kunstmaansettingsbundle_twig_extension';
+        return 'hgabka_kunstmaan_banner.banner_twig_extension';
     }
 }

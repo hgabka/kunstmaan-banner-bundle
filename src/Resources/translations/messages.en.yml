@@ -22,3 +22,5 @@ hgabka_kuma_banner:
     tabs:
         general: General data
         content: Appearance
+    fixtures:
+        folder_name: Banners

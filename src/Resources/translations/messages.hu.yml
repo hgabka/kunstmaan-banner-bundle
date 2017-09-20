@@ -26,3 +26,5 @@ hgabka_kuma_banner:
         missing_media: Kép típusú bannerhez kötelező képet megadni
         missing_html: Html típusú bannerhez kötelező html tartalmat megadni
         invalid_times: A megjelenés kezdetének korábbinak kell lennie a végénél
+    fixtures:
+        folder_name: Bannerek
