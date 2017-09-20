@@ -14,9 +14,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * Class NewsFixtures
  *
- * @package Ujhaz\PublicBundle\DataFixtures\ORM\DefaultSiteGenerator
- *
- * @SuppressWarnings(PMD.NPathComplexity)
  */
 class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -24,16 +21,6 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
      * @var ContainerInterface
      */
     private $container = null;
-
-    /**
-     * @var MediaCreatorService
-     */
-    private $mediaCreator;
-
-    /**
-     * Defined locales during generation
-     */
-    private $requiredLocales;
 
     /**
      * @var ObjectManager
@@ -48,7 +35,6 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
-        $this->mediaCreator = $this->container->get('kunstmaan_media.media_creator_service');
 
         $this->createMediaFolder();
     }
@@ -72,6 +58,7 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
                 ->setParent($imageFolder)
                 ->setInternalName('banner')
                 ->setName($translator->trans('hgabka_kuma_banner.fixtures.folder_name', [], null, $this->container->getParameter('defaultlocale')))
+                ->setRel('banner')
             ;
             $this->manager->persist($bannerFolder);
             $this->manager->flush();
