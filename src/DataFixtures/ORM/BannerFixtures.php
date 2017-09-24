@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Kunstmaan\MediaBundle\Entity\Folder;
 use Kunstmaan\MediaBundle\Helper\Services\MediaCreatorService;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -63,6 +64,10 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
             $this->manager->persist($bannerFolder);
             $this->manager->flush();
         }
+        $output = new ConsoleOutput();
+        $output->writeln([
+            "<comment>  > Banner folder created</comment>",
+        ]);
     }
 
     /**
