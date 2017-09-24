@@ -6,22 +6,20 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Kunstmaan\MediaBundle\Entity\Folder;
-use Kunstmaan\MediaBundle\Helper\Services\MediaCreatorService;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class NewsFixtures
- *
+ * Class NewsFixtures.
  */
 class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
      */
-    private $container = null;
+    private $container;
 
     /**
      * @var ObjectManager
@@ -41,7 +39,29 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
     }
 
     /**
-     * Create some dummy media files
+     * Get the order of this fixture.
+     *
+     * @return int
+     */
+    public function getOrder()
+    {
+        return 52;
+    }
+
+    /**
+     * Sets the Container.
+     *
+     * @param ContainerInterface $container A ContainerInterface instance
+     *
+     * @api
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * Create some dummy media files.
      */
     private function createMediaFolder()
     {
@@ -66,29 +86,7 @@ class BannerFixtures extends AbstractFixture implements OrderedFixtureInterface,
         }
         $output = new ConsoleOutput();
         $output->writeln([
-            "<comment>  > Banner folder created</comment>",
+            '<comment>  > Banner folder created</comment>',
         ]);
-    }
-
-    /**
-     * Get the order of this fixture
-     *
-     * @return int
-     */
-    public function getOrder()
-    {
-        return 52;
-    }
-
-    /**
-     * Sets the Container.
-     *
-     * @param ContainerInterface $container A ContainerInterface instance
-     *
-     * @api
-     */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 }
