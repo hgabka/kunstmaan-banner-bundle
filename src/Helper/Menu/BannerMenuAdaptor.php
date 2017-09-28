@@ -63,6 +63,27 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
             if (0 === stripos($request->attributes->get('_route'), $menuItem->getRoute())) {
                 $menuItem->setActive(true);
             }
+        } elseif ('banner' === $parent->getUniqueId()) {
+            $menuItem = new MenuItem($menu);
+            $menuItem->setUniqueId('banner_edit');
+            $menuItem->setRoute('hgabkakunstmaanbannerbundle_admin_banner_edit');
+            $menuItem->setLabel('Banner szerkesztése')->setAppearInNavigation(false)->setParent($parent);
+            if (0 === stripos($request->attributes->get('_route'), $menuItem->getRoute())) {
+                $menuItem->setActive(true);
+            }
+
+            $children[] = $menuItem;
+
+            $menuItem = new MenuItem($menu);
+            $menuItem->setUniqueId('banner_add');
+            $menuItem->setRoute('hgabkakunstmaanbannerbundle_admin_banner_add');
+            $menuItem->setLabel('Új banner')->setAppearInNavigation(false)->setParent($parent);
+            if (0 === stripos($request->attributes->get('_route'), $menuItem->getRoute())) {
+                $menuItem->setActive(true);
+            }
+
+            $children[] = $menuItem;
+
         }
     }
 }
