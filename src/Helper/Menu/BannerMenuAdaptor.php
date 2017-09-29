@@ -83,7 +83,6 @@ class BannerMenuAdaptor implements MenuAdaptorInterface
             }
 
             $children[] = $menuItem;
-
         }
     }
 }
