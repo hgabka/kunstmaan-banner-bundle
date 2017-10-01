@@ -36,7 +36,7 @@ class BannerAdminListConfigurator extends AbstractDoctrineORMAdminListConfigurat
         $this->authChecker = $authChecker;
         $this->editorRole = $editorRole;
 
-        $this->setAdminType(new BannerAdminType($handler, $router));
+        $this->setAdminType(BannerAdminType::class);
     }
 
     /**
