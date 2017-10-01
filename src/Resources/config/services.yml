@@ -31,3 +31,5 @@ services:
         tags:
             - { name: security.voter }
         public: false
+
+    Hgabka\KunstmaanBannerBundle\Helper\BannerHandler: "@hgabka_kunstmaan_banner.banner_handler"
