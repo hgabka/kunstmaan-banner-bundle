@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hgabka\KunstmaanBannerBundle\Security;
 
 use Hgabka\KunstmaanBannerBundle\Entity\Banner;
