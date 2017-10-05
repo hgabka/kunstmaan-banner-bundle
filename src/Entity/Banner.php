@@ -402,6 +402,8 @@ class Banner extends AbstractEntity
         } else {
             $this->html = null;
         }
+
+        return $this;
     }
 
     public function isImage()
