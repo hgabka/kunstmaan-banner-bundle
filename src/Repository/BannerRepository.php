@@ -6,8 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class BannerRepository extends EntityRepository
 {
-    public function getBannersForPlace($place, $locale)
-    {
+    protected function getBannersForPlaceQb($place, $locale) {
         return $this
             ->createQueryBuilder('b')
             ->leftJoin('b.media', ' m')
@@ -20,8 +19,23 @@ class BannerRepository extends EntityRepository
             ->andWhere('b.locale = :locale OR b.locale IS NULL')
             ->andWhere('b.media IS NOT NULL OR b.html IS NOT NULL')
             ->setParameter(':locale', $locale)
+        ;
+    }
+
+    public function getBannersForPlace($place, $locale)
+    {
+        return $this->getBannersForPlaceQb($place, $locale)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function countBannersForPlace($place, $locale)
+    {
+        return $this->getBannersForPlaceQb($place, $locale)
+            ->select('COUNT(b.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

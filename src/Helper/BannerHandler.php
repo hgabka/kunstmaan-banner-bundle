@@ -121,4 +121,19 @@ class BannerHandler
 
         return empty($displaySorsolo) ? null : $displaySorsolo[array_rand($displaySorsolo)];
     }
+
+    public function placeHasBanner($place)
+    {
+        if (empty($place) || !in_array($place, array_keys($this->getPlaceChoices()), true)) {
+            return false;
+        }
+
+        $count = $this
+            ->doctrine
+            ->getRepository('HgabkaKunstmaanBannerBundle:Banner')
+            ->countBannersForPlace($place, $this->kumaUtils->getCurrentLocale())
+        ;
+
+        return $count > 0;
+    }
 }
