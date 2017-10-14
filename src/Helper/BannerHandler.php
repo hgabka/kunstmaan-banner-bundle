@@ -2,7 +2,6 @@
 
 namespace Hgabka\KunstmaanBannerBundle\Helper;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Hgabka\KunstmaanBannerBundle\Entity\Banner;
 use Hgabka\KunstmaanExtensionBundle\Helper\KumaUtils;
@@ -25,9 +24,9 @@ class BannerHandler
     /**
      * BannerHandler constructor.
      *
-     * @param ManagerRegistry  $doctrine
-     * @param KumaUtils $kumaUtils
-     * @param array     $placeConfig
+     * @param ManagerRegistry $doctrine
+     * @param KumaUtils       $kumaUtils
+     * @param array           $placeConfig
      */
     public function __construct(ManagerRegistry $doctrine, KumaUtils $kumaUtils, array $placeConfig)
     {
